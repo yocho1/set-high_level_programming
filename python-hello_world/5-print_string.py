@@ -1,3 +1,4 @@
 #!/usr/bin/python3
 str = "Elmwood Institute"
-print(f"{str}{str}{str}\n{str[:9]}")
+print("{}{}{}".format(str, str, str))
+print(str[:9])
