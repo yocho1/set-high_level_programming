@@ -55,3 +55,27 @@ It rejects zero and negative integers with a ValueError:
 It works with keyword arguments too:
 
     >>> bg.integer_validator(name="size", value=7)
+
+Calling with no arguments raises a TypeError (missing arguments):
+
+    >>> bg.integer_validator()
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Calling with only one argument raises a TypeError (missing value):
+
+    >>> bg.integer_validator("age")
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+A tuple is not an integer:
+
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+A set is not an integer:
+
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    TypeError: age must be an integer
