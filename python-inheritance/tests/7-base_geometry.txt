@@ -1,1 +1,57 @@
-# Test file for BaseGeometry class
+The ``7-base_geometry`` module
+===============================
+
+Using ``BaseGeometry``
+-----------------------
+
+Import the class:
+
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
+
+``area`` is not implemented and raises an Exception:
+
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
+
+``integer_validator`` accepts valid positive integers silently:
+
+    >>> bg.integer_validator("my_int", 12)
+    >>> bg.integer_validator("width", 89)
+
+It rejects non-integer types with a TypeError:
+
+    >>> bg.integer_validator("name", "John")
+    Traceback (most recent call last):
+    TypeError: name must be an integer
+
+    >>> bg.integer_validator("height", 3.5)
+    Traceback (most recent call last):
+    TypeError: height must be an integer
+
+    >>> bg.integer_validator("flag", True)
+    Traceback (most recent call last):
+    TypeError: flag must be an integer
+
+    >>> bg.integer_validator("items", [1, 2, 3])
+    Traceback (most recent call last):
+    TypeError: items must be an integer
+
+    >>> bg.integer_validator("nothing", None)
+    Traceback (most recent call last):
+    TypeError: nothing must be an integer
+
+It rejects zero and negative integers with a ValueError:
+
+    >>> bg.integer_validator("age", 0)
+    Traceback (most recent call last):
+    ValueError: age must be greater than 0
+
+    >>> bg.integer_validator("distance", -4)
+    Traceback (most recent call last):
+    ValueError: distance must be greater than 0
+
+It works with keyword arguments too:
+
+    >>> bg.integer_validator(name="size", value=7)
