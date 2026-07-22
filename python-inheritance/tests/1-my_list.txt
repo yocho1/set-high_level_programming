@@ -1,12 +1,45 @@
-#!/usr/bin/python3
-MyList = __import__('1-my_list').MyList
+The ``1-my_list`` module
+========================
 
-my_list = MyList()
-my_list.append(1)
-my_list.append(4)
-my_list.append(2)
-my_list.append(3)
-my_list.append(5)
-print(my_list)
-my_list.print_sorted()
-print(my_list)
+Using ``MyList``
+-----------------
+
+Import the class:
+
+    >>> MyList = __import__('1-my_list').MyList
+
+Create an instance and append some unsorted integers:
+
+    >>> my_list = MyList()
+    >>> my_list.append(1)
+    >>> my_list.append(4)
+    >>> my_list.append(2)
+    >>> my_list.append(3)
+    >>> my_list.append(5)
+
+The list prints in insertion order:
+
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+
+``print_sorted`` prints a sorted view without mutating the list:
+
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5]
+
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+
+It behaves like a normal list otherwise:
+
+    >>> isinstance(my_list, list)
+    True
+
+    >>> len(my_list)
+    5
+
+Empty list case:
+
+    >>> empty = MyList()
+    >>> empty.print_sorted()
+    []
