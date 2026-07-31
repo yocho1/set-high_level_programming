@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Script that reads stdin and computes metrics."""
 import sys
-import re
 
 
 def print_stats(total_size, status_codes):
@@ -16,24 +15,25 @@ def parse_line(line):
     """Parse a log line and return status code and file size if valid."""
     parts = line.split()
 
-    # Check if line has at least 7 parts (IP, -, date, request, status, size)
+    # Need at least 7 parts for a valid log line
     if len(parts) < 7:
         return None, None
 
-    # Check if status code is valid (must be an integer)
+    # Try to get status code (second to last)
     try:
         status_code = int(parts[-2])
-    except ValueError:
+    except (ValueError, IndexError):
         return None, None
 
-    # Check if file size is valid (must be an integer)
+    # Try to get file size (last)
     try:
         file_size = int(parts[-1])
-    except ValueError:
+    except (ValueError, IndexError):
         return None, None
 
     # Only accept valid status codes
-    if status_code not in [200, 301, 400, 401, 403, 404, 405, 500]:
+    valid_codes = {200, 301, 400, 401, 403, 404, 405, 500}
+    if status_code not in valid_codes:
         return None, None
 
     return status_code, file_size
