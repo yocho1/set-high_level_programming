@@ -109,3 +109,17 @@ Works with floats:
 
     >>> matrix_mul([[1.5, 2], [3, 4]], [[1, 2], [3, 4.5]])
     [[7.5, 12.0], [15, 24.0]]
+
+Missing one argument:
+
+    >>> matrix_mul([[1, 2], [3, 4]])
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+Missing two arguments:
+
+    >>> matrix_mul()
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
