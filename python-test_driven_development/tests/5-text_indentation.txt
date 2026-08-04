@@ -1,0 +1,53 @@
+The ``5-text_indentation`` module
+====================================
+
+Using text_indentation
+-------------------------
+
+Import the function:
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Basic usage with periods, question marks and colons:
+
+    >>> text_indentation("Hello. How are you? Fine: thanks")
+    Hello.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    Fine:
+    <BLANKLINE>
+    thanks
+
+Text with no terminating punctuation at the end:
+
+    >>> text_indentation("Just one sentence")
+    Just one sentence
+
+Empty string prints nothing:
+
+    >>> text_indentation("")
+
+text must be a string:
+
+    >>> text_indentation(12)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(["Hello."])
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+Missing the required argument:
+
+    >>> text_indentation()
+    Traceback (most recent call last):
+        ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
