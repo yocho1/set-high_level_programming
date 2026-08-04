@@ -1,4 +1,5 @@
-d stdin line by line and compute metrics from an HTTP log stream.
+#!/usr/bin/python3
+"""Read stdin line by line and compute metrics from an HTTP log stream.
 
 Every 10 lines, and on keyboard interruption (CTRL+C), print:
     - the total file size accumulated so far
@@ -25,8 +26,6 @@ if __name__ == "__main__":
         for line in sys.stdin:
             parts = line.split()
 
-            # Need at least a status code and a file size as the last
-            # two fields to consider the line usable at all.
             if len(parts) < 2:
                 continue
 
@@ -35,7 +34,6 @@ if __name__ == "__main__":
             except ValueError:
                 continue
 
-            # File size always counts once we can parse it.
             total_size += size
 
             status = parts[-2]
