@@ -14,9 +14,7 @@ def lazy_matrix_mul(m_a, m_b):
         numpy.ndarray: the product of m_a and m_b.
 
     Raises:
-        ValueError: if m_a and m_b can't be multiplied.
+        Any exception raised directly by numpy when the inputs are
+        invalid or cannot be multiplied.
     """
-    try:
-        return np.matmul(m_a, m_b)
-    except ValueError:
-        raise ValueError("m_a and m_b can't be multiplied")
+    return np.matmul(m_a, m_b)
