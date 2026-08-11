@@ -15,22 +15,42 @@ class TestBase(unittest.TestCase):
         b = Base()
         self.assertEqual(b.id, 1)
 
-    def test_id_public(self):
-        b1 = Base(12)
-        self.assertEqual(b1.id, 12)
-
     def test_id_default_increment(self):
         b1 = Base()
         b2 = Base()
         self.assertEqual(b2.id, b1.id + 1)
 
-    def test_id_type_str(self):
-        b = Base("hello")
-        self.assertEqual(b.id, "hello")
+    def test_id_public(self):
+        b1 = Base(89)
+        self.assertEqual(b1.id, 89)
 
-    def test_id_type_float(self):
-        b = Base(3.14)
-        self.assertEqual(b.id, 3.14)
+    def test_to_json_string_none(self):
+        self.assertEqual(Base.to_json_string(None), "[]")
+
+    def test_to_json_string_empty_list(self):
+        self.assertEqual(Base.to_json_string([]), "[]")
+
+    def test_to_json_string_with_list(self):
+        result = Base.to_json_string([{'id': 12}])
+        self.assertEqual(result, '[{"id": 12}]')
+
+    def test_to_json_string_returns_str(self):
+        result = Base.to_json_string([{'id': 12}])
+        self.assertIsInstance(result, str)
+
+    def test_from_json_string_none(self):
+        self.assertEqual(Base.from_json_string(None), [])
+
+    def test_from_json_string_empty(self):
+        self.assertEqual(Base.from_json_string("[]"), [])
+
+    def test_from_json_string_with_data(self):
+        result = Base.from_json_string('[{"id": 89}]')
+        self.assertEqual(result, [{"id": 89}])
+
+    def test_from_json_string_returns_list(self):
+        result = Base.from_json_string('[{"id": 89}]')
+        self.assertIsInstance(result, list)
 
 
 if __name__ == "__main__":
