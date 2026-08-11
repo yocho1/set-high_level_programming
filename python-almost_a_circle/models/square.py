@@ -1,4 +1,4 @@
-re class that inherits from Rectangle."""
+"""Square class that inherits from Rectangle."""
 
 from models.rectangle import Rectangle
 
@@ -23,7 +23,7 @@ class Square(Rectangle):
 
     def __str__(self):
         """Return string representation of the square."""
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.size)
 
     def update(self, *args, **kwargs):
         """Update attributes with args or kwargs."""

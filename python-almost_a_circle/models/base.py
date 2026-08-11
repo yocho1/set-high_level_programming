@@ -1,4 +1,4 @@
-se class for all models."""
+"""Base class for all models."""
 
 import json
 
