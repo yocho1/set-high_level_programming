@@ -4,7 +4,7 @@ from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Square class with size, x, y."""
+    """Square class - a Rectangle with equal width and height."""
 
     def __init__(self, size, x=0, y=0, id=None):
         """Initialize a new Square instance."""
@@ -12,18 +12,19 @@ class Square(Rectangle):
 
     @property
     def size(self):
-        """Getter for size."""
+        """Getter for size (same as width/height)."""
         return self.width
 
     @size.setter
     def size(self, value):
-        """Setter for size with validation."""
+        """Setter for size - updates both width and height."""
         self.width = value
         self.height = value
 
     def __str__(self):
         """Return string representation of the square."""
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.size)
+        return "[Square] ({}) {}/{} - {}".format(
+            self.id, self.x, self.y, self.width)
 
     def update(self, *args, **kwargs):
         """Update attributes with args or kwargs."""
