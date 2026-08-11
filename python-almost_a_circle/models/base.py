@@ -1,6 +1,7 @@
 """Base class for all models."""
 
 import json
+import csv
 
 
 class Base:
@@ -65,5 +66,44 @@ class Base:
             with open(filename, "r", encoding="utf-8") as file:
                 list_dicts = cls.from_json_string(file.read())
                 return [cls.create(**d) for d in list_dicts]
+        except FileNotFoundError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Write CSV representation of list_objs to a file."""
+        filename = cls.__name__ + ".csv"
+        with open(filename, "w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            if list_objs is None:
+                list_objs = []
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    writer.writerow(
+                        [obj.id, obj.width, obj.height, obj.x, obj.y])
+                elif cls.__name__ == "Square":
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Return list of instances loaded from a CSV file."""
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, "r", newline="", encoding="utf-8") as file:
+                reader = csv.reader(file)
+                instances = []
+                for row in reader:
+                    if not row:
+                        continue
+                    values = [int(v) for v in row]
+                    if cls.__name__ == "Rectangle":
+                        keys = ["id", "width", "height", "x", "y"]
+                    elif cls.__name__ == "Square":
+                        keys = ["id", "size", "x", "y"]
+                    else:
+                        keys = []
+                    d = dict(zip(keys, values))
+                    instances.append(cls.create(**d))
+                return instances
         except FileNotFoundError:
             return []
