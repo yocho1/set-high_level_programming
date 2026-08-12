@@ -18,7 +18,8 @@ if __name__ == "__main__":
     )
 
     cursor = db.cursor()
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY states.id ASC"
+    query = ("SELECT * FROM states WHERE name = BINARY '{}' "
+             "ORDER BY states.id ASC")
     cursor.execute(query.format(state_name))
     rows = cursor.fetchall()
     for row in rows:
