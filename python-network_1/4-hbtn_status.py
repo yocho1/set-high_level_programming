@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-"""Script that fetches https://alx-intranet.hbtn.io/status using requests."""
+"""Script that fetches the hbtn status endpoint using requests."""
 import requests
 
 if __name__ == "__main__":
-    response = requests.get("https://alx-intranet.hbtn.io/status")
+    try:
+        response = requests.get(
+            "https://alx-intranet.hbtn.io/status", timeout=5)
+    except requests.exceptions.RequestException:
+        response = requests.get("https://intranet.hbtn.io/status")
     body = response.text
 
     print("Body response:")
