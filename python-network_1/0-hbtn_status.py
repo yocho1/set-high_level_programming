@@ -1,11 +1,17 @@
 #!/usr/bin/python3
-"""Script that fetches https://alx-intranet.hbtn.io/status."""
+"""Script that fetches the hbtn status endpoint."""
 import urllib.request
+import urllib.error
 
 if __name__ == "__main__":
-    with urllib.request.urlopen("https://alx-intranet.hbtn.io/status") \
-            as response:
-        body = response.read()
+    try:
+        with urllib.request.urlopen(
+                "https://alx-intranet.hbtn.io/status") as response:
+            body = response.read()
+    except urllib.error.URLError:
+        with urllib.request.urlopen(
+                "https://intranet.hbtn.io/status") as response:
+            body = response.read()
 
     print("Body response:")
     print("\t- type: {}".format(type(body)))
